@@ -14,6 +14,9 @@ function addTodo(event)
     const todoDiv=document.createElement('div');
     todoDiv.classList.add('todo');
 
+    const buttonDiv=document.createElement('div');
+    buttonDiv.classList.add('buttonDiv');
+
     const newTodo =document.createElement('li');
     newTodo.innerText=todoInput.value;
     newTodo.classList.add('todo-item');
@@ -21,13 +24,25 @@ function addTodo(event)
 
     const completebutton = document.createElement('button');
 
+    completebutton.innerHTML='<i class="fas fa-check"> </i>' ; 
     completebutton.classList.add('complete-button');
-    todoDiv.appendChild(completebutton);
+
+    //added this
+    buttonDiv.appendChild(completebutton);
+    // todoDiv.appendChild(completebutton);
 
     const deletebutton = document.createElement('button');
     deletebutton.innerHTML='<i class="fas fa-trash"> </i>' ; 
     deletebutton.classList.add('delete-button');
-    todoDiv.appendChild(deletebutton);
+
+    //added this
+    buttonDiv.appendChild(deletebutton);
+    // todoDiv.appendChild(deletebutton);
+
+
+    todoDiv.appendChild(buttonDiv) //added this 
+    
+    
     todolist.appendChild(todoDiv)
     todoInput.value="";
 }
@@ -35,16 +50,19 @@ function addTodo(event)
 function deletecheck(e)
 {
     const item=e.target;
+    console.log(item);
     if(item.classList[0]==="delete-button")
     {
         const todo = item.parentElement;
-        todo.remove();
+        const mainDiv=todo.parentElement;
+        mainDiv.remove();
     }
 
     if(item.classList[0]==="complete-button")
     {
         const todo = item.parentElement;
-        todo.classList.toggle('completed');
+        const mainDiv=todo.parentElement;
+        mainDiv.classList.toggle('completed');
     }
 
 }
